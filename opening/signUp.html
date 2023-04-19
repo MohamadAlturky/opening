@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-WiqOW1Q2tFhL95a67QFguxyY5r+l0rC5X9GqjmcgocbL7OIkSttiJU87N6LvDw6Uz7V72MeHnX9iLZJ/6c4B6g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <style>
+        body{
+            opacity: 0;
+        }
+        .form-control:focus {
+            border-color: #e8e8e8;
+            box-shadow: none;
+        }
+
+        .form-control::placeholder {
+            color: #ccc;
+        }
+
+        .input-group-text {
+            background-color: #f7f7f7;
+            border-color: #e8e8e8;
+        }
+
+        .btn-primary {
+            background-color: #5cb85c;
+            border-color: #5cb85c;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #449d44;
+            border-color: #449d44;
+        }
+
+        .form-check-label {
+            color: #666;
+        }
+
+        * {
+            transition: all 0.9s;
+        }
+
+        .form-check{
+            padding: 0px !important;
+        }
+        @media screen and (max-width: 1200px) {
+            .col-6 {
+                min-width: 80vw;
+            }
+            /*
+            * {
+                font-size: 0.7rem;
+            }
+            .card-header h1{
+                font-size: 1.5rem;
+            } */
+            
+        }
+
+        .form-check-input{
+                padding: 0 !important;
+                margin: 0 !important;
+                position: relative !important;
+            }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+</head>
+
+<body class="none">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto mt-5">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-header bg-white ">
+                            <h1 class="text-center mb-0">Sign Up</h1>
+                        </div>
+
+
+                        <form id="signup-form" method="post" action="#"
+                            class="d-flex flex-column align-top justify-content-between">
+
+                            <div class="form-group">
+                                <label for="name">User Name</label>
+                                <input type="text" class="form-control " id="name" name="name"
+                                    placeholder="Enter your name" required autofocus>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control " id="email" name="email"
+                                    placeholder="Enter email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+
+                                <input type="password" class="form-control " id="password" name="password"
+                                    placeholder="Enter password" aria-label="Password" aria-describedby="show_password"
+                                    required>
+
+                                <div class="invalid-feedback "></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="confirm_password">Confirm Password</label>
+                                <input type="password" class="form-control " id="confirm_password"
+                                    name="confirm_password" placeholder="Confirm password" required>
+                            </div>
+
+
+                            <div class="form-group d-flex form-check">
+                                <input type="checkbox" class="form-check-input" id="agree_terms" name="agree_terms">
+                                <label class="ml-2 form-check-label " for="agree_terms"
+                                 style=" display: flex; align-items: center; height: 13px;">I agree to the terms and
+                                    conditions</label>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function () {
+
+            $('body').animate({'opacity': '100'},'middle');
+            $("#signup-form").validate({
+                rules: {
+                    name: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    confirm_password: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    agree_terms: {
+                        required: true
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your name"
+                    },
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please enter your password",
+                        minlength: "Your password must be at least 6 characters long"
+                    },
+                    confirm_password: {
+                        required: "Please confirm your password",
+                        equalTo: "Your passwords do not match"
+                    },
+                    agree_terms: {
+                        required: "Please agree to the terms and conditions"
+                    }
+                },
+                errorElement: "small",
+                errorClass: "text-danger",
+                highlight: function (element) {
+                    $(element).closest(".form-group").removeClass("has-success").addClass("has-error");
+                },
+                unhighlight: function (element) {
+                    $(element).closest(".form-group").removeClass("has-error").addClass("has-success");
+                }
+            });
+
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+</body>
+</html>
+
+
+
+<!-- 
+
+
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+$("#signup-form").validate({
+        rules: {
+            email: {
+                required: true,
+                pattern: re
+            },
+            password: {
+                required: true,
+                minlength: 6,
+                strongPassword: true
+            }
+        },
+        messages: {
+            email: {
+                required: "Please enter your email address",
+                pattern: "Please enter a valid email address"
+            },
+            password: {
+                required: "Please enter your password",
+                minlength: "Your password must be at least 6 characters long",
+                strongPassword: "Your password must contain at least one uppercase letter, one lowercase letter, one number, and one of the following special characters: ./,-/*"
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+$.validator.addMethod("strongPassword", function (value, element) {
+        return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[./,\-*])[A-Za-z\d./,\-*]{6,}$/.test(value);
+    }, "Your password must contain at least one uppercase letter, one lowercase letter, one number, and one of the following special characters: ./,-/*");
+
+    
+ -->
